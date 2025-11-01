@@ -222,7 +222,7 @@
       if (!trackingNumber) return;
 
       try {
-        const res = await axios.get(`http://localhost:4000/api/packages/${trackingNumber}`);
+        const res = await axios.get(`https://track-backend-pll2.onrender.com/api/packages/${trackingNumber}`);
         const data = res.data;
 
         document.getElementById("trackingResult").innerHTML = `
@@ -276,7 +276,7 @@
       } catch (err) {
         document.getElementById("trackingResult").textContent = "❌ Tracking failed or package not found.";
         document.getElementById("trackingResults").style.display = "none";
-        document.getElementById("qrcode").innerHTML = "";
+        document.getElementById("qrcode").i4000nnerHTML = "";
       }
     }
   </script>

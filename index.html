@@ -236,40 +236,66 @@ box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.15);
 
 
 
-  <!-- ✅ Tracking Section -->
-  <div class="tracking-box">
+<div class="tracking-box">
     <div class="loader-bar"></div>
+
     <h2 id="trackTitle">Track Your Package</h2>
-    <input type="text" id="trackingNumber" placeholder="Enter tracking number" />
-    <button id="trackButton" onclick="trackPackage()">Track</button>
 
-  <!-- ✅ Tracking Details and Share Options -->
-  <div id="trackingResults">
+    <input
+        type="text"
+        id="trackingNumber"
+        placeholder="Enter tracking number">
 
-    <div id="trackingResults">
+    <button id="trackButton" onclick="trackPackage()">
+        Track
+    </button>
+</div>
+
+<div id="trackingResults" style="display:none;">
+
     <div id="trackingResult"></div>
 
-    <div class="package-info" id="packageDetails"></div>
+    <div id="packageDetails"></div>
 
-    <h3><i class="fas fa-history"></i> Tracking History</h3>
-    <div id="trackingHistory"></div>
+    <h3>
+        <i class="fas fa-history"></i>
+        Tracking History
+    </h3>
 
-    ...
-    </div>
-    <div class="package-info" id="packageDetails"></div>
-
-    <h3><i class="fas fa-history"></i> Tracking History</h3>
     <div id="trackingHistory"></div>
 
     <div class="share-options">
-      <h4><i class="fas fa-share-alt"></i> Share Tracking Details:</h4>
-      <button id="whatsappShareBtn" class="share-btn whatsapp"><i class="fab fa-whatsapp"></i> WhatsApp</button>
-      <button id="emailShareBtn" class="share-btn email"><i class="fas fa-envelope"></i> Email</button>
-      <button id="copyLinkBtn" class="share-btn link"><i class="fas fa-link"></i> Copy Link</button>
-      <button id="copyNumberBtn" class="share-btn copy-btn"><i class="fas fa-copy"></i> Copy Number</button>
-      <div id="qrcode"></div>
+
+        <h4>
+            <i class="fas fa-share-alt"></i>
+            Share Tracking Details
+        </h4>
+
+        <button id="whatsappShareBtn" class="share-btn whatsapp">
+            <i class="fab fa-whatsapp"></i>
+            WhatsApp
+        </button>
+
+        <button id="emailShareBtn" class="share-btn email">
+            <i class="fas fa-envelope"></i>
+            Email
+        </button>
+
+        <button id="copyLinkBtn" class="share-btn link">
+            <i class="fas fa-link"></i>
+            Copy Link
+        </button>
+
+        <button id="copyNumberBtn" class="share-btn copy-btn">
+            <i class="fas fa-copy"></i>
+            Copy Number
+        </button>
+
+        <div id="qrcode"></div>
+
     </div>
-  </div>
+
+</div>>
 
   <!-- <script type="text/javascript">
 var Tawk_API = Tawk_API || {};
@@ -570,23 +596,18 @@ document.getElementById("packageDetails").innerHTML = `
   </p>
 `;
 
-// Tracking history
-const historyHtml = data.history.map(log => `
-  <p>
-    📍 <strong>${translateStatus(log.status, language)}</strong>
-    — ${log.location}
-    (${new Date(log.timestamp).toLocaleString(
-      getLocale(language)
-    )})
-  </p>
+const history = data.history || [];
+
+const historyHtml = history.map(log => `
+<p>
+📍 <strong>${translateStatus(log.status, language)}</strong>
+— ${log.location}
+(${new Date(log.timestamp).toLocaleString(getLocale(language))})
+</p>
 `).join("");
 
-document.getElementById("trackingHistory").innerHTML = historyHtml;
-
-// Tracking history heading
-document.querySelector("#trackingResults h3").innerHTML = `
-  <i class="fas fa-history"></i> ${t.trackingHistory}
-`;
+document.getElementById("trackingHistory").innerHTML =
+historyHtml || "<p>No tracking history available.</p>";
 
 // Share heading
 document.querySelector(".share-options h4").innerHTML = `
